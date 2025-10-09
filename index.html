@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDxLGS JT - Official Site</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Custom Tailwind config to define the deep red colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Deep, rich red for the main stroke and accents (TEDx-like)
+                        'ted-red': '#B31B1B', 
+                        // Brighter red for the text
+                        'ted-glow': '#E62B1E', 
+                        // Dark gray for secondary text and backgrounds
+                        'dark-bg': '#0A0A0A',
+                        'mid-gray': '#1f2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            /* Initially hide overflow to prevent scrolling during the intro animation */
+            overflow-y: hidden; 
+        }
+
+        /* Custom styles for the SVG circle stroke offset */
+        .progress-circle {
+            transition: stroke-dashoffset 0.9s linear; /* Smooth, continuous animation */
+        }
+        
+        /* Custom digital font look - GLOW REMOVED */
+        .digital-font {
+            letter-spacing: -2px;
+        }
+        
+        /* Custom CSS classes for applying the TEDx red colors to SVG stroke */
+        .ted-stroke {
+            stroke: #B31B1B;
+        }
+        .ted-text {
+            color: #E62B1E;
+        }
+
+        /* Navbar active state styling */
+        .nav-link:hover {
+            color: #E62B1E;
+            text-shadow: 0 0 5px #E62B1E;
+        }
+
+        /* --- Intro Animation Styles --- */
+        .intro {
+            /* Ensures the intro screen is always on top and covers everything */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            z-index: 1000; /* Extremely high z-index */
+            opacity: 1;
+            /* Logo initial state */
+            transform: scale(1);
+            animation: logoScaleIn 1s ease forwards;
+        }
+
+        @keyframes logoScaleIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Fade Out animation keyframes */
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        /* Utility class for scroll animations - initial state */
+        .scroll-fade-in {
+            transition: all 1000ms cubic-bezier(0.4, 0, 0.2, 1); /* Custom duration and easing */
+            transform: translateY(3rem); /* 3rem = 48px, starting off-screen */
+            opacity: 0;
+        }
+        
+        /* Utility class for scroll animations - final state (added by JS) */
+        .scroll-fade-in.is-visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        footer {
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.footer {
+  text-align: left;
+}
+.idk{
+    color: #E62B1E;
+}
+.idk:hover{
+    text-decoration: blueviolet;
+    color: white;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+h3 {
+  position: relative;
+  font-size: 24px;
+}
+
+h3 .underline {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #E62B1E;
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.icon {
+  width: 16px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.icon1 {
+  width: 40px;
+  height: auto;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.frame {
+  margin-top: 8px;
+}
+
+/* === COUNCIL SECTION === */
+.council-section {
+  text-align: center;
+  margin: 40px auto;
+  padding: 30px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 25px;
+  max-width: 100%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.council-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.council-title::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 2px;
+  background-color: #E62B1E;
+  margin: 10px auto 0;
+}
+
+.council-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.contact-card {
+  flex: 1 1 300px;
+  max-width: 350px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  transition: transform 0.3s ease;
+  box-sizing: border-box;
+
+  /* ✅ Fix overflow for long text/email */
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.contact-card .name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.phone-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 8px;
+  background: #E62B1E;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.phone-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.phone-btn:hover {
+  background: #ac0e49;
+  transform: scale(1.05);
+}
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .footer-column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .icon {
+    width: 20px;
+  }
+
+  .icon1 {
+    width: 35px;
+  }
+  footer, 
+.footer-container, 
+.footer-column, 
+.info-box, 
+.contact-card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+}
+    
+    </style>
+</head>
+<body class="bg-black text-gray-200 min-h-screen">
+
+    <!-- Intro Splash Screen -->
+    <div class="intro">
+        <div class="intro-logo text-white flex items-baseline">
+            <!-- Styling copied from the Hero section for consistency -->
+            <span class="text-7xl sm:text-9xl font-black digital-font leading-none ted-text" style="line-height: 1;">TED</span>
+            <span class="text-4xl sm:text-6xl font-black digital-font ted-text ml-[-8px] self-start" style="line-height: 1.5;">x</span> 
+            <span class="text-6xl sm:text-8xl font-black digital-font text-white ml-4" style="line-height: 1;">LGS JT</span>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 bg-black bg-opacity-95 shadow-lg z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Branding -->
+                <a href="#home" class="flex items-baseline">
+                    <span class="text-3xl font-black digital-font ted-text" style="line-height: 1;">TED</span>
+                    <span class="text-xl font-black digital-font ted-text ml-[-4px] self-start" style="line-height: 1.5;">x</span> 
+                    <span class="text-2xl font-black digital-font text-white ml-2" style="line-height: 1;">LGS JT</span>
+                </a>
+                
+                <!-- Desktop Navigation Links -->
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#home" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">Home</a>
+                    <a href="#speakers" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">Speakers</a>
+                    <a href="#about" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">About Us</a>
+                    <!-- Register Button in Nav -->
+                    <a href="#register-section" class="ml-4 px-4 py-2 text-sm font-bold bg-ted-red text-white rounded-lg shadow-xl hover:bg-ted-glow transition duration-300">Register Now</a>
+                </div>
+
+                <!-- Mobile Menu Button (Burger) -->
+                <div class="sm:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-mid-gray focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ted-glow" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Icon when menu is closed. Heroicon name: menu -->
+                        <svg class="block h-6 w-6 menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icon when menu is open. Heroicon name: x -->
+                        <svg class="hidden h-6 w-6 close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu, show/hide based on menu state. -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-mid-gray hover:text-ted-glow" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('mobile-menu-button').querySelector('.menu-icon').classList.remove('hidden'); document.getElementById('mobile-menu-button').querySelector('.close-icon').classList.add('hidden');">Home</a>
+                <a href="#speakers" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-mid-gray hover:text-ted-glow" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('mobile-menu-button').querySelector('.menu-icon').classList.remove('hidden'); document.getElementById('mobile-menu-button').querySelector('.close-icon').classList.add('hidden');">Speakers</a>
+                <a href="#about" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-mid-gray hover:text-ted-glow" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('mobile-menu-button').querySelector('.menu-icon').classList.remove('hidden'); document.getElementById('mobile-menu-button').querySelector('.close-icon').classList.add('hidden');">About Us</a>
+                <a href="#register-section" class="block w-full text-center mt-2 px-4 py-2 text-sm font-bold bg-ted-red text-white rounded-lg shadow-xl hover:bg-ted-glow transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('mobile-menu-button').querySelector('.menu-icon').classList.remove('hidden'); document.getElementById('mobile-menu-button').querySelector('.close-icon').classList.add('hidden');">Register Now</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- MAIN CONTENT START (Offset for fixed header) -->
+    <main class="pt-16">
+
+        <!-- 1. Hero / Countdown Section -->
+        <section id="home" class="min-h-[90vh] flex flex-col items-center justify-center p-4 py-20">
+            <!-- Branding Header (Always visible) -->
+            <div class="flex flex-col items-center mb-10">
+                <!-- NEW INTRO TEXT -->
+                <p class="text-sm sm:text-lg font-medium text-gray-400 mb-2 uppercase tracking-widest">
+                    LGS JT Thinkers Forum Society Presents
+                </p>
+                <!-- TEDx LGS JT Logo -->
+                <div id="intro-logo" class="flex items-baseline mb-2">
+                    <!-- TED (in main red) -->
+                    <span class="text-6xl sm:text-8xl font-black digital-font leading-none ted-text" style="line-height: 1;">TED</span>
+                    
+                    <!-- x (smaller, red, aligned high) -->
+                    <span class="text-3xl sm:text-5xl font-black digital-font ted-text ml-[-6px] self-start" style="line-height: 1.5;">x</span> 
+                    
+                    <!-- LGS JT (in PURE WHITE) -->
+                    <span class="text-5xl sm:text-7xl font-black digital-font leading-none text-white ml-4" style="line-height: 1;">LGS JT</span>
+                </div>
+                
+                <!-- Countdown Date Text -->
+                <h2 id="countdown-title" class="text-xl sm:text-3xl font-bold text-gray-400 mt-2">
+                    <span class="ted-text">|</span> Live Event: November 3rd <span class="ted-text">|</span>
+                </h2>
+            </div>
+
+            <!-- Countdown Timer Container - SCROLL ANIMATION TARGET -->
+            <div id="countdown-container" class="flex flex-wrap justify-center items-end gap-6 sm:gap-12 w-full max-w-5xl mb-12 
+                scroll-fade-in" data-delay="0">
+                
+                <!-- Day Circle: w-32 (mobile), w-48 (sm+) -->
+                <div class="order-1 flex flex-col items-center justify-center w-32 sm:w-48 aspect-square">
+                    <div class="relative w-full aspect-square">
+                        <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="#1f2937" stroke-width="8"></circle>
+                            <circle id="days-arc" cx="100" cy="100" r="95" fill="none" stroke-width="8" 
+                                    stroke-linecap="round" class="progress-circle ted-stroke"
+                                    stroke-dasharray="597" stroke-dashoffset="597"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="days-value" class="text-4xl sm:text-5xl font-black digital-font leading-none ted-text">00</span> 
+                            <span class="text-base sm:text-lg font-medium text-gray-400 mt-1">Days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hours/Mins Center Display: w-40 (mobile), w-56 (sm+) -->
+                <div class="order-2 flex flex-col items-center justify-center w-40 sm:w-56 aspect-square">
+                    <div class="relative w-full aspect-square">
+                        <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="#1f2937" stroke-width="8"></circle>
+                            <circle id="hms-arc" cx="100" cy="100" r="95" fill="none" stroke-width="8" 
+                                    stroke-linecap="round" class="progress-circle ted-stroke"
+                                    stroke-dasharray="597" stroke-dashoffset="597"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="hms-value" class="text-5xl sm:text-6xl font-black digital-font leading-none ted-text">00:00</span>
+                            <span class="text-lg sm:text-xl font-medium text-gray-400 mt-2">Hrs:Mins</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seconds Circle: w-32 (mobile), w-48 (sm+) -->
+                <div class="order-3 flex flex-col items-center justify-center w-32 sm:w-48 aspect-square">
+                    <div class="relative w-full aspect-square">
+                        <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="#1f2937" stroke-width="8"></circle>
+                            <circle id="seconds-arc" cx="100" cy="100" r="95" fill="none" stroke-width="8" 
+                                    stroke-linecap="round" class="progress-circle ted-stroke"
+                                    stroke-dasharray="597" stroke-dashoffset="597"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="seconds-value" class="text-4xl sm:text-5xl font-black digital-font leading-none ted-text">00</span>
+                            <span class="text-base sm:text-lg font-medium text-gray-400 mt-1">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Button - SCROLL ANIMATION TARGET -->
+            <a href="#register-section" class="w-full max-w-sm px-8 py-4 text-xl font-extrabold text-center bg-ted-red text-white rounded-lg shadow-2xl transition duration-500 transform hover:scale-105 hover:bg-ted-glow
+                scroll-fade-in" data-delay="100">
+                Register Now
+            </a>
+        </section>
+
+        <!-- 2. Speakers Section -->
+        <section id="speakers" class="bg-dark-bg py-20 px-4">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-5xl font-extrabold text-center mb-16 ted-text">
+                    Our Speakers
+                </h2>
+
+                <div class="space-y-16">
+                    <!-- Speaker 1 - SCROLL ANIMATION TARGET -->
+                    <div class="flex flex-col md:flex-row items-center bg-mid-gray/50 p-6 rounded-xl shadow-lg border-l-8 border-ted-red 
+                        scroll-fade-in" data-delay="0">
+                        <img src="https://placehold.co/150x150/000/E62B1E?text=S1" alt="Speaker 1" class="w-32 h-32 rounded-full object-cover mb-6 md:mb-0 md:mr-8 border-4 border-ted-red p-1" onerror="this.onerror=null; this.src='https://placehold.co/150x150/000/E62B1E?text=S1';">
+                        <div class="speaker-info text-center md:text-left">
+                            <h3 class="text-3xl font-bold mb-2 ted-text">Dr. ARK 500</h3>
+                            <p class="text-gray-400 italic mb-4">Topic: The Future of Personalized Learning</p>
+                            <p class="text-gray-300">Dr. ARK 500 is an inspiring innovator who blends technology and creativity to revolutionize education, focusing on scalable solutions for global velo challenges.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker 2 - SCROLL ANIMATION TARGET -->
+                    <div class="flex flex-col md:flex-row-reverse items-center bg-mid-gray/50 p-6 rounded-xl shadow-lg border-r-8 border-ted-red
+                        scroll-fade-in" data-delay="150">
+                        <img src="https://placehold.co/150x150/000/E62B1E?text=S2" alt="Speaker 2" class="w-32 h-32 rounded-full object-cover mb-6 md:mb-0 md:ml-8 border-4 border-ted-red p-1" onerror="this.onerror=null; this.src='https://placehold.co/150x150/000/E62B1E?text=S2';">
+                        <div class="speaker-info text-center md:text-right">
+                            <h3 class="text-3xl font-bold mb-2 ted-text">GURU </h3>
+                            <p class="text-gray-400 italic mb-4">Topic: How to goon in public</p>
+                            <p class="text-gray-300">Mr. Khalid is a thought leader known for his groundbreaking ideas in gooning, advocating for non gooners, and love for pgf.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Speaker 3 - SCROLL ANIMATION TARGET -->
+                    <div class="flex flex-col md:flex-row items-center bg-mid-gray/50 p-6 rounded-xl shadow-lg border-l-8 border-ted-red
+                        scroll-fade-in" data-delay="300">
+                        <img src="https://placehold.co/150x150/000/E62B1E?text=S3" alt="Speaker 3" class="w-32 h-32 rounded-full object-cover mb-6 md:mb-0 md:mr-8 border-4 border-ted-red p-1" onerror="this.onerror=null; this.src='https://placehold.co/150x150/000/E62B1E?text=S3';">
+                        <div class="speaker-info text-center md:text-left">
+                            <h3 class="text-3xl font-bold mb-2 ted-text">aliyan</h3>
+                            <p class="text-gray-400 italic mb-4">Topic: The Power of man city</p>
+                            <p class="text-gray-300">aliyan brings a powerful story of innovation, resilience, and youth empowerment to the TEDx stage, inspiring the next generation of changemakers to support earling aaalllaaannn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. About Us Section -->
+        <section id="about" class="py-20 px-4">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-5xl font-extrabold text-center mb-16 ted-text">
+                    About TEDxLGS JT
+                </h2>
+                <!-- About Content Grid - SCROLL ANIMATION TARGET -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-mid-gray/30 p-8 rounded-xl shadow-inner border border-gray-700
+                    scroll-fade-in" data-delay="0">
+                    <div class="column">
+                        <p class="text-lg leading-relaxed mb-4">
+                            TEDxLGS JT is a student-led initiative, independently organized under the license of TED. We aim to bring together curious minds to share ideas worth spreading, sparking deep discussion and connection within the LGS community.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            Our event celebrates creativity, leadership, and innovation, providing a platform for local voices to share their unique perspectives on global challenges and inspiring futures.
+                        </p>
+                    </div>
+                    <div class="column">
+                        <p class="text-lg leading-relaxed mb-4 font-semibold ted-text">
+                            Join us on November 3rd for an unforgettable experience filled with mind-blowing talks, networking opportunities, and a day dedicated to new perspectives and enlightenment.
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-gray-300">
+                            <li>Inspiring talks from local leaders and innovators.</li>
+                            <li>Interactive sessions and workshops.</li>
+                            <li>Networking with passionate community members.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Register Now Call-to-Action - SCROLL ANIMATION TARGET -->
+                <div id="register-section" class="text-center mt-12 scroll-fade-in" data-delay="150">
+                    <a href="#register-section" class="inline-block px-10 py-5 text-2xl font-extrabold bg-ted-glow text-black rounded-lg shadow-2xl transition duration-500 transform hover:scale-105 hover:bg-white">
+                        Secure Your Seat!
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (for copyright/licensing) -->
+    <footer class="bg-black border-t border-gray-800 py-6">
+        <!--Contact Us-->
+      <section class="footer" data-aos="fade-up" data-aos-delay="200"><footer>
+        <div class="footer" id="contact-us"></div>
+          <div class="footer-container">
+            <div class="footer-column">
+              <div class="footer-section">
+                </div>
+                  <div class="footer-section">
+                        <h3>Find Us <span class="underline"></span></h3>
+                        <iframe class="frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6805.9164225023205!2d74.2856334346539!3d31.47033569554604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391903e0fc887323%3A0xab96115d544c1796!2sLahore%20Grammar%20School%20for%20Boys%20(LGS%20JT)!5e0!3m2!1sen!2s!4v1727659253416!5m2!1sen!2s" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us <span class="underline"></span></h3>
+                        <a href="https://www.instagram.com/jt.empresario/" target="_blank"><img class="icon1" class="frame" src="insta.webp" alt="Instagram"></a>
+                        <a href="mailto:jtempresario.official@gmail.com"><img class="icon1" class="frame" src="gmail.png" alt="Gmail"></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="council-section">
+                      <h2 class="council-title">Contact Us</h2>
+                      <div class="council-cards">
+                        
+                        <div class="contact-card">
+                          <h3>Event Organiser</h3>
+                          <p class="name">Awais Ali Samad</p>
+                          <a href="tel:+923204329844" class="phone-btn">
+                            <img src="phone.jpg" alt="Phone"> +92 320 4329844
+                          </a>
+                        </div>
+
+                        <div class="contact-card">
+                          <h3>Executive Producer</h3>
+                          <p class="name">Hashim Abbas</p>
+                          <a href="tel:+923351650407" class="phone-btn">
+                            <img src="phone.jpg" alt="Phone"> +923351650407
+                          </a>
+                        </div>
+                        
+                        <div class="contact-card">
+                          <h3>Jamal</h3>
+                          <p class="name">Waleed Ajmal</p>
+                          <a href="tel:+923154765827" class="phone-btn">
+                            <img src="phone.jpg" alt="Phone"> +92 315 4765827
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+      </section>
+  <!-- Copyright -->
+  <div>
+    <p class="end">
+      ©Copyright TEDXLGSJT 2025 | Designed By
+      <span class="hehe">
+        <a href="https://www.instagram.com/waleed._fr/" target="_blank" class="idk">Waleed Ajmal</a>
+      </span>
+    </p>
+  </div>
+
+
+    <script>
+        // --- Configuration ---
+        const TARGET_DATE = new Date('November 3, 2025 00:00:00').getTime(); 
+        const CIRCUMFERENCE = 597;
+
+        // --- DOM Elements ---
+        const daysValueEl = document.getElementById('days-value');
+        const hmsValueEl = document.getElementById('hms-value');
+        const secondsValueEl = document.getElementById('seconds-value');
+        
+        const daysArcEl = document.getElementById('days-arc');
+        const hmsArcEl = document.getElementById('hms-arc');
+        const secondsArcEl = document.getElementById('seconds-arc');
+
+        const countdownTitleEl = document.getElementById('countdown-title');
+        const introLogoEl = document.getElementById('intro-logo');
+        
+        // Set the total length for the progress arcs initially
+        daysArcEl.style.strokeDasharray = CIRCUMFERENCE;
+        hmsArcEl.style.strokeDasharray = CIRCUMFERENCE;
+        secondsArcEl.style.strokeDasharray = CIRCUMFERENCE;
+
+        // --- Helper Functions ---
+
+        /**
+         * Calculates the stroke-dashoffset for the progress bar.
+         */
+        function getOffset(percentage) {
+            return CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE;
+        }
+
+        /**
+         * Formats a number to be at least two digits (e.g., 5 -> "05").
+         */
+        function formatNumber(n) {
+            return n < 10 ? "0" + n : n;
+        }
+        
+        // --- Main Countdown Logic ---
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = TARGET_DATE - now;
+
+            if (distance < 0) {
+                // Countdown is finished
+                daysValueEl.textContent = "00";
+                hmsValueEl.textContent = "00:00";
+                secondsValueEl.textContent = "00";
+                daysArcEl.style.strokeDashoffset = CIRCUMFERENCE;
+                hmsArcEl.style.strokeDashoffset = CIRCUMFERENCE;
+                secondsArcEl.style.strokeDashoffset = CIRCUMFERENCE;
+                
+                countdownTitleEl.innerHTML = "<span class='ted-glow'>EVENT IS LIVE!</span>";
+                introLogoEl.classList.add('hidden'); 
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            // --- Calculate Time Remaining ---
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // --- Update Numerical Display ---
+            daysValueEl.textContent = days.toString().padStart(2, '0');
+            hmsValueEl.textContent = `${formatNumber(hours)}:${formatNumber(minutes)}`;
+            secondsValueEl.textContent = formatNumber(seconds);
+
+            // --- Update Progress Arcs ---
+            const totalSecondsInDay = (hours * 3600) + (minutes * 60) + seconds;
+            const dayPercentage = 100 - ((totalSecondsInDay / 86400) * 100); 
+            daysArcEl.style.strokeDashoffset = getOffset(dayPercentage);
+
+            const totalSecondsInHour = (minutes * 60) + seconds;
+            const hourPercentage = 100 - ((totalSecondsInHour / 3600) * 100);
+            hmsArcEl.style.strokeDashoffset = getOffset(hourPercentage);
+
+            const minutePercentage = 100 - ((seconds / 60) * 100);
+            secondsArcEl.style.strokeDashoffset = getOffset(minutePercentage);
+        }
+
+        let countdownInterval;
+        
+        // --- Scroll Animation Logic ---
+        function setupScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.scroll-fade-in');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Use a setTimeout with data-delay for staggered effect
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, delay);
+                        
+                        // Stop observing once the animation is triggered
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // Trigger the animation when the element is 15% visible
+                threshold: 0.15 
+            });
+
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const intro = document.querySelector(".intro");
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileMenuButton.querySelector('.menu-icon');
+            const closeIcon = mobileMenuButton.querySelector('.close-icon');
+
+            // 1. INTRO ANIMATION LOGIC
+            // Wait for 2.5 seconds, then start the fade out animation
+            setTimeout(() => {
+                intro.style.animation = "fadeOut 1.5s ease forwards";
+                
+                // Wait for fade out animation to finish (1.5s)
+                setTimeout(() => {
+                    intro.style.display = "none";
+                    document.body.style.overflowY = "auto"; // Re-enable scroll
+                    
+                    // 2. START COUNTDOWN TIMER and SCROLL ANIMATIONS after intro is done
+                    updateCountdown();
+                    countdownInterval = setInterval(updateCountdown, 1000);
+                    setupScrollAnimations();
+                }, 1500);
+            }, 2500);
+
+
+            // 3. MOBILE NAV BAR TOGGLE LOGIC
+            mobileMenuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.classList.toggle('hidden');
+                
+                // Toggle icons based on menu state
+                if (isMenuOpen) {
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                } else {
+                    menuIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                }
+            });
+            
+            // Close menu when a link is clicked
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
