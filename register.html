@@ -362,16 +362,16 @@
         <nav id="navbar" class="fixed top-0 left-0 right-0 bg-black bg-opacity-95 shadow-lg z-50 transition-all duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
-                    <a href="#home" class="flex items-baseline">
+                    <a href="index.html" class="flex items-baseline">
                         <span class="text-3xl font-black digital-font ted-text mr-1" style="line-height: 1;">TED</span>
                         <span class="text-xl font-black digital-font ted-text ml-[-2px] self-start" style="line-height: 1.5;">x</span> 
                         <span class="text-2xl font-black digital-font text-white ml-2" style="line-height: 1;">LGS JT</span>
                     </a>
                     
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="#home" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">Home</a>
-                        <a href="#speakers" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">Speakers</a>
-                        <a href="#about" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">About Us</a>
+                        <a href="index.html#home" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">Home</a>
+                        <a href="index.html#speakers" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">Speakers</a>
+                        <a href="index.html#about" class="nav-link text-gray-400 hover:text-ted-glow px-3 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-lg">About Us</a>
                         <a href="register.html" class="ml-4 px-4 py-2 text-sm font-bold bg-ted-red text-white rounded-lg shadow-xl hover:bg-ted-glow transition duration-300">Register Now</a>
                     </div>
 
@@ -399,157 +399,9 @@
             </div>
         </nav>
         
-        <main class="pt-16">
-
-            <section id="home" class="min-h-[90vh] flex flex-col items-center justify-center p-4 py-20">
-                <div class="flex flex-col items-center mb-10">
-                    <p class="text-sm sm:text-lg font-medium text-gray-400 mb-2 uppercase tracking-widest">
-                        LGS JT Thinkers Forum Society Presents
-                    </p>
-                    <div id="intro-logo" class="flex items-baseline mb-2">
-                        <span class="text-6xl sm:text-8xl font-black digital-font leading-none ted-text mr-1" style="line-height: 1;">TED</span>
-                        
-                        <span class="text-3xl sm:text-5xl font-black digital-font ted-text ml-[-4px] self-start" style="line-height: 1.5;">x</span> 
-                        
-                        <span class="text-5xl sm:text-7xl font-black digital-font leading-none text-white ml-4" style="line-height: 1;">LGS JT</span>
-                    </div>
-                    
-                    <h2 id="countdown-title" class="text-xl sm:text-3xl font-bold text-gray-400 mt-2">
-                        <span class="ted-text">|</span> Live Event: November 3rd <span class="ted-text">|</span>
-                    </h2>
-                </div>
-
-                <div id="countdown-container" class="flex flex-wrap justify-center items-end gap-6 sm:gap-12 w-full max-w-5xl mb-12 
-                    scroll-fade-in" data-delay="0">
-                    
-                    <div class="order-1 flex flex-col items-center justify-center w-32 sm:w-48 aspect-square">
-                        <div class="relative w-full aspect-square">
-                            <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
-                                <circle cx="100" cy="100" r="95" fill="none" stroke="#1f2937" stroke-width="8"></circle>
-                                <circle id="days-arc" cx="100" cy="100" r="95" fill="none" stroke-width="8" 
-                                        stroke-linecap="round" class="progress-circle ted-stroke"
-                                        stroke-dasharray="597" stroke-dashoffset="597"></circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span id="days-value" class="text-4xl sm:text-5xl font-black digital-font leading-none ted-text">00</span> 
-                                <span class="text-base sm:text-lg font-medium text-gray-400 mt-1">Days</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="order-2 flex flex-col items-center justify-center w-40 sm:w-56 aspect-square">
-                        <div class="relative w-full aspect-square">
-                            <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
-                                <circle cx="100" cy="100" r="95" fill="none" stroke="#1f2937" stroke-width="8"></circle>
-                                <circle id="hms-arc" cx="100" cy="100" r="95" fill="none" stroke-width="8" 
-                                        stroke-linecap="round" class="progress-circle ted-stroke"
-                                        stroke-dasharray="597" stroke-dashoffset="597"></circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span id="hms-value" class="text-5xl sm:text-6xl font-black digital-font leading-none ted-text">00:00</span>
-                                <span class="text-lg sm:text-xl font-medium text-gray-400 mt-2">Hrs:Mins</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="order-3 flex flex-col items-center justify-center w-32 sm:w-48 aspect-square">
-                        <div class="relative w-full aspect-square">
-                            <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
-                                <circle cx="100" cy="100" r="95" fill="none" stroke="#1f2937" stroke-width="8"></circle>
-                                <circle id="seconds-arc" cx="100" cy="100" r="95" fill="none" stroke-width="8" 
-                                        stroke-linecap="round" class="progress-circle ted-stroke"
-                                        stroke-dasharray="597" stroke-dashoffset="597"></circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span id="seconds-value" class="text-4xl sm:text-5xl font-black digital-font leading-none ted-text">00</span>
-                                <span class="text-base sm:text-lg font-medium text-gray-400 mt-1">Seconds</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="#register-section" class="w-full max-w-sm px-8 py-4 text-xl font-extrabold text-center bg-ted-red text-white rounded-lg shadow-2xl transition duration-500 transform hover:scale-105 hover:bg-ted-glow
-                    scroll-fade-in" data-delay="100">
-                    Register Now
-                </a>
-            </section>
-
-            <section id="speakers" class="bg-dark-bg/90 py-20 px-4">
-                <div class="max-w-7xl mx-auto">
-                    <h2 class="text-5xl font-extrabold text-center mb-16 ted-text">
-                        Our Speakers
-                    </h2>
-
-                    <div class="space-y-16">
-                        <div class="flex flex-col md:flex-row items-center bg-mid-gray/50 p-6 rounded-xl shadow-lg border-l-8 border-ted-red 
-                            scroll-fade-in" data-delay="0">
-                            <img src="https://placehold.co/150x150/000/E62B1E?text=S1" alt="Speaker 1" class="w-32 h-32 rounded-full object-cover mb-6 md:mb-0 md:mr-8 border-4 border-ted-red p-1" onerror="this.onerror=null; this.src='https://placehold.co/150x150/000/E62B1E?text=S1';">
-                            <div class="speaker-info text-center md:text-left">
-                                <h3 class="text-3xl font-bold mb-2 ted-text">Dr. ARK 500</h3>
-                                <p class="text-gray-400 italic mb-4">Topic: The Future of Personalized Learning</p>
-                                <p class="text-gray-300">Dr. ARK 500 is an inspiring innovator who blends technology and creativity to revolutionize education, focusing on scalable solutions for global velo challenges.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col md:flex-row-reverse items-center bg-mid-gray/50 p-6 rounded-xl shadow-lg border-r-8 border-ted-red
-                            scroll-fade-in" data-delay="150">
-                            <img src="https://placehold.co/150x150/000/E62B1E?text=S2" alt="Speaker 2" class="w-32 h-32 rounded-full object-cover mb-6 md:mb-0 md:ml-8 border-4 border-ted-red p-1" onerror="this.onerror=null; this.src='https://placehold.co/150x150/000/E62B1E?text=S2';">
-                            <div class="speaker-info text-center md:text-right">
-                                <h3 class="text-3xl font-bold mb-2 ted-text">GURU </h3>
-                                <p class="text-gray-400 italic mb-4">Topic: How to goon in public</p>
-                                <p class="text-gray-300">Mr. Khalid is a thought leader known for his groundbreaking ideas in gooning, advocating for non gooners, and love for pgf.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex flex-col md:flex-row items-center bg-mid-gray/50 p-6 rounded-xl shadow-lg border-l-8 border-ted-red
-                            scroll-fade-in" data-delay="300">
-                            <img src="https://placehold.co/150x150/000/E62B1E?text=S3" alt="Speaker 3" class="w-32 h-32 rounded-full object-cover mb-6 md:mb-0 md:mr-8 border-4 border-ted-red p-1" onerror="this.onerror=null; this.src='https://placehold.co/150x150/000/E62B1E?text=S3';">
-                            <div class="speaker-info text-center md:text-left">
-                                <h3 class="text-3xl font-bold mb-2 ted-text">aliyan</h3>
-                                <p class="text-gray-400 italic mb-4">Topic: The Power of man city</p>
-                                <p class="text-gray-300">aliyan brings a powerful story of innovation, resilience, and youth empowerment to the TEDx stage, inspiring the next generation of changemakers to support earling aaalllaaannn.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="about" class="py-20 px-4">
-                <div class="max-w-7xl mx-auto">
-                    <h2 class="text-5xl font-extrabold text-center mb-16 ted-text">
-                        About TEDxLGS JT
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-mid-gray/30 p-8 rounded-xl shadow-inner border border-gray-700
-                        scroll-fade-in" data-delay="0">
-                        <div class="column">
-                            <p class="text-lg leading-relaxed mb-4">
-                                TEDxLGS JT is a student-led initiative, independently organized under the license of TED. We aim to bring together curious minds to share ideas worth spreading, sparking deep discussion and connection within the LGS community.
-                            </p>
-                            <p class="text-lg leading-relaxed">
-                                Our event celebrates creativity, leadership, and innovation, providing a platform for local voices to share their unique perspectives on global challenges and inspiring futures.
-                            </p>
-                        </div>
-                        <div class="column">
-                            <p class="text-lg leading-relaxed mb-4 font-semibold ted-text">
-                                Join us on November 3rd for an unforgettable experience filled with mind-blowing talks, networking opportunities, and a day dedicated to new perspectives and enlightenment.
-                            </p>
-                            <ul class="list-disc list-inside space-y-2 ml-4 text-gray-300">
-                                <li>Inspiring talks from local leaders and innovators.</li>
-                                <li>Interactive sessions and workshops.</li>
-                                <li>Networking with passionate community members.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div id="register-section" class="text-center mt-12 scroll-fade-in" data-delay="150">
-                        <a href="register.html" class="inline-block px-10 py-5 text-2xl font-extrabold bg-ted-glow text-black rounded-lg shadow-2xl transition duration-500 transform hover:scale-105 hover:bg-white">
-                            Secure Your Seat!
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-        </main>
+        <section>
+            <div style="width:100%;height:100vh;" data-fillout-id="sRoqi1otj5us" data-fillout-embed-type="standard" data-fillout-inherit-parameters></div><script src="https://server.fillout.com/embed/v1/"></script>
+        </section>
 
         <footer>
             <section class="footer" data-aos="fade-up" data-aos-delay="200">
